@@ -1,16 +1,95 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { truncateAddress } from "../utils/utils";
 import { MdVerified } from "react-icons/md";
 import { BiCopy } from "react-icons/bi";
 import { GetAllUsers } from "../graphql/query";
 import { useQuery, useMutation } from "@apollo/client";
-import { VerifyUser } from "../graphql/mutations";
+import { Link } from "react-router-dom";
+import {
+  VerifyUser,
+  ApproveUserKyc,
+  GetKycByWalletId,
+} from "../graphql/mutations";
 import { message } from "antd";
 function Products() {
+  const [isApproved, setIsApproved] = useState({
+    userId: "",
+    isApproved: false,
+  });
   const { data: users } = useQuery(GetAllUsers);
   const [messageApi, contextHolder] = message.useMessage();
 
+  const [showKyc, setShowKyc] = useState(false);
+
   const [verifyUser] = useMutation(VerifyUser);
+  const [approveUserKyc] = useMutation(ApproveUserKyc);
+  const [getKycByWalletId] = useMutation(GetKycByWalletId);
+
+  const approveKyc = async (userId) => {
+    let kyc = await approveUserKyc({
+      variables: {
+        userId: userId,
+      },
+    });
+    console.log(kyc.data.approveUserKyc.isKycApproved);
+    setIsApproved({
+      userId: userId,
+      isApproved: kyc.data.approveUserKyc.isApproved,
+    });
+    window.location.reload();
+    // return kyc.data.approveUserKyc.isApproved;
+  };
+
+  const getKycStatus = async (walletId) => {
+    let kyc = await getKycByWalletId({
+      variables: {
+        walletId: walletId,
+      },
+    });
+    console.log({ kyc });
+  };
+
+  const fetchAllKyc = async () => {
+    // let {}
+    // for (let i = 0; i < users?.users.length; i++) {
+    // let data = await getKycStatus(users?.users[0].wallets[0].address);
+    // console.log(data);
+    // // }
+  };
+
+  const ShowKycModal = ({ walletId, index }) => {
+    return (
+      <>
+        <div
+          style={{
+            position: "absolute",
+            width: "100%",
+            height: "100%",
+            left: "0",
+            padding: "100px",
+            top: "0",
+          }}
+        >
+          <div
+            style={{
+              background: "grey",
+              width: "100%",
+              height: "100%",
+              display: "flex",
+            }}
+          >
+            <button onClick={() => setShowKyc(false)}>Close</button>
+            <div>{walletId}</div>
+          </div>
+        </div>
+      </>
+    );
+  };
+
+  useEffect(() => {
+    fetchAllKyc();
+  }, [users]);
+
   return (
     <div>
       <div className="ml-[250px]">
@@ -85,7 +164,7 @@ function Products() {
                   </td>
                   <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">
                     <span class="relative inline-block px-3 py-1 font-semibold  leading-tight">
-                      {item?.isVerified ? (
+                      {item.isKycApproved ? (
                         <>
                           <MdVerified size={30} className="text-sky-500" />
                         </>
@@ -94,22 +173,35 @@ function Products() {
                       )}
                     </span>
                   </td>
-                  <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">
-                    <button
-                      onClick={() =>
-                        verifyUser({
-                          variables: {
-                            userId: item?._id,
-                            isVerified: !item?.isVerified,
-                          },
-                          refetchQueries: [{ query: GetAllUsers }],
-                        })
-                      }
-                      className="bg-black text-white group   items-center rounded-md px-5 py-2 text-sm"
-                    >
-                      {!item?.isVerified ? "Approve" : "Reject"}
-                    </button>
-                  </td>
+                  <div style={{ display: "block" }}>
+                    {item.isKycApproved ? (
+                      <button onClick={() => approveKyc(item?._id)}>
+                        Reject Kyc
+                      </button>
+                    ) : (
+                      <button onClick={() => approveKyc(item?._id)}>
+                        Approve Kyc
+                      </button>
+                    )}
+                    <Link to={`/${item?.wallets[0]?.address}`}>show kyc</Link>
+                  </div>
+
+                  {/* {data?.map((e, index) =>
+                    e.userWallet === item?.wallets[0]?.address ? (
+                      <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">
+                        <button
+                          onClick={() =>
+                            getKycStatus(item?.wallets[0]?.address)
+                          }
+                          className="bg-black text-white group items-center rounded-md px-5 py-2 text-sm"
+                        >
+                          {!item?.isVerified ? "Approve" : "Reject"}
+                        </button>
+                      </td>
+                    ) : (
+                      ""
+                    )
+                  )} */}
                 </tr>
               ))}
             </tbody>

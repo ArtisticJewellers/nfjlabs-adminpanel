@@ -248,7 +248,47 @@ const RoleRoyaltyAddressUpdate = gql`
     }
   }
 `;
+
+// const ApproveUserKyc = gql`
+//   mutation ApproveUserKyc($walletId: String) {
+//     approveUserKyc(walletId: $walletId) {
+//       isApproved
+//       userWallet
+//       fname
+//     }
+//   }
+// `;
+
+const GetKycByWalletId = gql`
+  mutation GetKycByWalletId($walletId: String) {
+    getKycByWalletId(walletId: $walletId) {
+      _id
+      address
+      country
+      dob
+      email
+      fname
+      identity
+      isApproved
+      lname
+      phone
+      userWallet
+    }
+  }
+`;
+
+const ApproveUserKyc = gql`
+  mutation ApproveUserKyc($userId: String) {
+    approveUserKyc(userId: $userId) {
+      _id
+      username
+      isKycApproved
+    }
+  }
+`;
+
 export {
+  ApproveUserKyc,
   UpdateProfile,
   Register,
   CreateNft,
@@ -264,4 +304,5 @@ export {
   RoleRoyaltyUpdate,
   RemoveArtist,
   RoleRoyaltyAddressUpdate,
+  GetKycByWalletId,
 };

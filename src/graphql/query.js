@@ -180,6 +180,7 @@ const GetAllUsers = gql`
       firstname
       lastname
       websiteUrl
+      isKycApproved
     }
   }
 `;
@@ -315,6 +316,7 @@ const TrendingNft = gql`
     }
   }
 `;
+
 const BannerNft = gql`
   query BannerNft($popularCollection: String) {
     bannerNft(popularCollection: $popularCollection) {
