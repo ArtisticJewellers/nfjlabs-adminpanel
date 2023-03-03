@@ -10,7 +10,7 @@ import "antd/dist/reset.css";
 import Settings from "./pages/Settings";
 import KycInfo from "./pages/KycInfo";
 function App() {
-  const Login = () => {};
+  const Login = () => { };
   return (
     <>
       {/* <Protected.Provider value={{ state, login: Login }}> */}
@@ -21,8 +21,8 @@ function App() {
           {/* <Route path="/sign" component={Sign} /> */}
           <Route path="/popular" component={Popular} />
           <Route path="/users" component={Products} />
-          <Route path="/:id" component={KycInfo} />
           <Route path="/settings" component={Settings} />
+          <Route path="/:id" component={KycInfo} />
 
           <Route
             path="/assets/:network/:address/:tokenId"

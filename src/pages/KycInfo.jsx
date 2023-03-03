@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { GetKycByWalletId } from "../graphql/mutations";
 import { useMutation } from "@apollo/client";
 const KycInfo = () => {
@@ -48,50 +48,140 @@ const KycInfo = () => {
     >
       {data._id && (
         <>
-          {" "}
-          <div style={{ display: "flex" }}>
-            <h1>Address: </h1>
-            {data.address}
-          </div>
-          <div style={{ display: "flex" }}>
-            <h1>Country: </h1>
-            {data.country}
-          </div>
-          <div style={{ display: "flex" }}>
-            <h1>DOB: </h1>
-            {data.dob}
-          </div>
-          <div style={{ display: "flex" }}>
-            <h1>Email: </h1>
-            {data.email}
-          </div>
-          <div style={{ display: "flex" }}>
-            <h1>First Name: </h1>
-            {data.fname}
-          </div>
-          <div style={{ display: "flex" }}>
-            <h1>Identity: </h1>
-            {data.identity}
-          </div>
-          <div style={{ display: "flex" }}>
-            <h1>isApproved: </h1>
-            {data.isApproved}
-          </div>
-          <div style={{ display: "flex" }}>
-            <h1>Last Name: </h1>
-            {data.lname}
-          </div>
-          <div style={{ display: "flex" }}>
-            <h1>Phone: </h1>
-            {data.phone}
-          </div>
-          <div style={{ display: "flex" }}>
-            <h1>wallet: </h1>
-            {data.userWallet}
+          <div className="p-8 rounded border border-gray-200">
+            <h1 className="font-medium text-3xl">User KYC</h1>
+            <p className="text-gray-600 mt-6">
+              user kyc details for wallet {id}
+            </p>
+            <form>
+              <div className="mt-8 grid lg:grid-cols-4 gap-2">
+                <div>
+                  <label
+                    for="name"
+                    className="text-sm text-gray-700 block mb-1 font-medium"
+                  >
+                    Full Name
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    className="bg-gray-100 border border-white rounded py-1 px-3 block text-gray-700 w-400"
+                    style={{ outline: "none" }}
+                    value={data.fname + " " + data.lname}
+                    readOnly
+                  />
+                </div>
+                <div>
+                  <label
+                    for="name"
+                    className="text-sm text-gray-700 block mb-1 font-medium"
+                  >
+                    Phone Number
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    className="bg-gray-100 border border-white rounded py-1 px-3 block text-gray-700 w-400"
+                    style={{ outline: "none" }}
+                    value={data.phone}
+                    readOnly
+                  />
+                </div>
+                <div>
+                  <label
+                    for="name"
+                    className="text-sm text-gray-700 block mb-1 font-medium"
+                  >
+                    Email
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    className="bg-gray-100 border border-white rounded py-1 px-3 block text-gray-700 w-400"
+                    style={{ outline: "none" }}
+                    value={data.email}
+                    readOnly
+                  />
+                </div>
+                <div>
+                  <label
+                    for="name"
+                    className="text-sm text-gray-700 block mb-1 font-medium"
+                  >
+                    Country
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    className="bg-gray-100 border border-white rounded py-1 px-3 block text-gray-700 w-400"
+                    style={{ outline: "none" }}
+                    value={data.country}
+                    readOnly
+                  />
+                </div>
+                <div>
+                  <label
+                    for="name"
+                    className="text-sm text-gray-700 block mb-1 font-medium"
+                  >
+                    Date of Birth
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    className="bg-gray-100 border border-white rounded py-1 px-3 block text-gray-700 w-400"
+                    style={{ outline: "none" }}
+                    value={data.dob}
+                    readOnly
+                  />
+                </div>
+                <div style={{ marginTop: "25px" }}>
+                  <a href={data.identity} target="_blank" style={{ cursor: "pointer" }}>
+                    <label
+                      for="name"
+                      style={{ cursor: "pointer" }}
+                    >
+                      View Identity Proof ↪
+                    </label>
+                  </a>
+                </div>
+              </div>
+              <div className="space-x-4 mt-8">
+                <Link
+                  to="/users"
+                  type="submit"
+                  className="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 active:bg-blue-700 disabled:opacity-50"
+                >
+                  Back
+                </Link>
+              </div>
+            </form>
           </div>
         </>
       )}
-      {!data.userWallet && <div>{error}</div>}
+      {!data.userWallet &&
+        <div className="p-8 rounded border border-gray-200">
+          <h1 className="font-medium text-3xl">No KYC Found</h1>
+          <p className="text-gray-600 mt-6">
+            This user with wallet {id} has not submitted the kyc form
+          </p>
+          <form>
+            <div className="space-x-4 mt-8">
+              <Link
+                to="/users"
+                type="submit"
+                className="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 active:bg-blue-700 disabled:opacity-50"
+              >
+                Back
+              </Link>
+            </div>
+          </form>
+        </div>}
     </div>
   );
 };

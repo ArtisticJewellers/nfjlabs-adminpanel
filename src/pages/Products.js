@@ -108,10 +108,10 @@ function Products() {
                   Wallet Address
                 </th>
                 <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                  Verify
+                  Accept KYC
                 </th>
                 <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                  Profile Badge
+                  View KYC
                 </th>
               </tr>
             </thead>
@@ -131,8 +131,15 @@ function Products() {
                         ></img>
                       </div>
                       <div class="ml-3">
-                        <p class="text-gray-900 whitespace-no-wrap">
+                        <p class="text-gray-900 whitespace-no-wrap flex">
                           {item?.username}
+                          {item.isKycApproved ? (
+                            <>
+                              <MdVerified size={20} className="text-sky-500 ml-2" />
+                            </>
+                          ) : (
+                            <MdVerified size={20} className="text-red-900 ml-2" />
+                          )}
                         </p>
                       </div>
                     </div>
@@ -162,29 +169,25 @@ function Products() {
                       </span>
                     </p>
                   </td>
+
                   <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">
-                    <span class="relative inline-block px-3 py-1 font-semibold  leading-tight">
+                    <div style={{ display: "block" }}>
                       {item.isKycApproved ? (
-                        <>
-                          <MdVerified size={30} className="text-sky-500" />
-                        </>
+                        <button onClick={() => approveKyc(item?._id)} style={{ backgroundColor: "red", color: "white", padding: "5px 10px", margin: "10px", borderRadius: "3px" }}>
+                          Reject Kyc
+                        </button>
                       ) : (
-                        <MdVerified size={30} className="text-red-900" />
+                        <button onClick={() => approveKyc(item?._id)} style={{ backgroundColor: "green", color: "white", padding: "5px 10px", margin: "10px", borderRadius: "3px" }}>
+                          Approve Kyc
+                        </button>
                       )}
-                    </span>
+                    </div>
                   </td>
-                  <div style={{ display: "block" }}>
-                    {item.isKycApproved ? (
-                      <button onClick={() => approveKyc(item?._id)}>
-                        Reject Kyc
-                      </button>
-                    ) : (
-                      <button onClick={() => approveKyc(item?._id)}>
-                        Approve Kyc
-                      </button>
-                    )}
-                    <Link to={`/${item?.wallets[0]?.address}`}>show kyc</Link>
-                  </div>
+
+                  <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">
+                    <Link to={`/${item?.wallets[0]?.address}`} style={{ backgroundColor: "blue", color: "white", padding: "5px 10px", margin: "10px", borderRadius: "3px" }}>↪</Link>
+
+                  </td>
 
                   {/* {data?.map((e, index) =>
                     e.userWallet === item?.wallets[0]?.address ? (

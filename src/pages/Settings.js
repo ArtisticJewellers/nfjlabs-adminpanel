@@ -20,7 +20,7 @@ function Settings() {
   return (
     <div className="ml-[250px]">
       <div className="container">
-        <div>
+        {/* <div>
           <h2 className="text-2xl mt-10 font-bold">Royalty</h2>
           <div>
             <p>
@@ -76,7 +76,7 @@ function Settings() {
               </Form>
             </p>
           </div>
-        </div>
+        </div> */}
         <div>
           <h2 className="text-2xl mt-10 font-bold">Royalty Address</h2>
           <div>

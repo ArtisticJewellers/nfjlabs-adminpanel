@@ -12,11 +12,14 @@ function Home() {
       <div className=" container w-full">
         <Tabs>
           <TabList>
-            <Tab>Active</Tab>
-            <Tab>Reject</Tab>
+            <Tab>Active NFTs</Tab>
+            <Tab>New NFTs</Tab>
           </TabList>
 
           <TabPanel>
+            <div>
+              <p>Approved NFTs on marketplace</p>
+            </div>
             <div className="grid  grid-cols-1 sm:grid-cols-2  xl:grid-cols-3 2xl:grid-cols-4 gap-4 grow  ">
               {nfts?.nfts?.map(
                 (val, item) =>
@@ -30,6 +33,9 @@ function Home() {
             </div>
           </TabPanel>
           <TabPanel>
+            <div>
+              <p>Approve or reject NFTs on marketplace</p>
+            </div>
             <div className="grid  grid-cols-1 sm:grid-cols-2  xl:grid-cols-3 2xl:grid-cols-4 gap-4 grow  ">
               {nfts?.nfts?.map(
                 (val, item) =>
