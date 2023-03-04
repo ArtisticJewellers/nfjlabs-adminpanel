@@ -140,13 +140,30 @@ const KycInfo = () => {
                     readOnly
                   />
                 </div>
+                <div>
+                  <label
+                    for="name"
+                    className="text-sm text-gray-700 block mb-1 font-medium"
+                  >
+                    Residential Address
+                  </label>
+                  <textarea
+                    type="text"
+                    name="name"
+                    id="name"
+                    className="bg-gray-100 border border-white rounded py-1 px-3 block text-gray-700 w-400"
+                    style={{ outline: "none" }}
+                    value={data.address}
+                    readOnly
+                  />
+                </div>
                 <div style={{ marginTop: "25px" }}>
                   <a href={data.identity} target="_blank" style={{ cursor: "pointer" }}>
                     <label
                       for="name"
                       style={{ cursor: "pointer" }}
                     >
-                      View Identity Proof ↪
+                      Click To View Identity Proof ↪
                     </label>
                   </a>
                 </div>

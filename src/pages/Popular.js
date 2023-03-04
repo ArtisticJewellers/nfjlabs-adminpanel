@@ -51,8 +51,8 @@ function Popular() {
               <div>
                 <div className="mt-5 flex  justify-between">
                   <div>
-                    <h2 className="text-3xl font-bold">Verified Artists</h2>
-                    <p>Verified artists on artists page</p>
+                    <h2 className="text-3xl font-bold">Add Artists</h2>
+                    <p>Add artists on artists page</p>
                   </div>
                   <AddArtistModal />
                 </div>
