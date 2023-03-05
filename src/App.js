@@ -10,7 +10,7 @@ import "antd/dist/reset.css";
 import Settings from "./pages/Settings";
 import KycInfo from "./pages/KycInfo";
 function App() {
-  const Login = () => { };
+  const Login = () => {};
   return (
     <>
       {/* <Protected.Provider value={{ state, login: Login }}> */}

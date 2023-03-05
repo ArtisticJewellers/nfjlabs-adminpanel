@@ -211,6 +211,7 @@ const NftApproved = gql`
     }
   }
 `;
+
 const VerifyUser = gql`
   mutation VerifyUser($userId: String, $isVerified: Boolean) {
     verifyUser(userId: $userId, isVerified: $isVerified) {
@@ -222,6 +223,7 @@ const VerifyUser = gql`
     }
   }
 `;
+
 const RemoveArtist = gql`
   mutation RemoveArtist($popularCollection: String, $userId: String) {
     removeArtist(popularCollection: $popularCollection, userId: $userId) {
