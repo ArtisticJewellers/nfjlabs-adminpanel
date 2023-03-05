@@ -42,15 +42,18 @@ function Popular() {
         <div className="mt-5">
           <Tabs>
             <TabList>
-              <Tab>Artist</Tab>
-              <Tab>Banner NFT</Tab>
+              <Tab>Artists</Tab>
+              {/* <Tab>Banner NFT</Tab> */}
               <Tab>Featured NFT</Tab>
               <Tab>Trending NFT</Tab>
             </TabList>
             <TabPanel>
               <div>
                 <div className="mt-5 flex  justify-between">
-                  <h2 className="text-3xl font-bold">Popular Artist</h2>
+                  <div>
+                    <h2 className="text-3xl font-bold">Add Artists</h2>
+                    <p>Add artists on artists page</p>
+                  </div>
                   <AddArtistModal />
                 </div>
                 <div className=" mt-5 grid  grid-cols-1 sm:grid-cols-2  xl:grid-cols-3 2xl:grid-cols-4 gap-4 grow  ">
@@ -60,7 +63,7 @@ function Popular() {
                 </div>
               </div>
             </TabPanel>
-            <TabPanel>
+            {/* <TabPanel>
               <div>
                 <div className="mt-5 flex  justify-between">
                   <h2 className="text-3xl font-bold">Banner NFT</h2>
@@ -73,11 +76,14 @@ function Popular() {
                   />
                 </div>
               </div>
-            </TabPanel>
+            </TabPanel> */}
             <TabPanel>
               <div>
                 <div className="mt-5 flex  justify-between">
-                  <h2 className="text-3xl font-bold">Featured NFT</h2>
+                  <div>
+                    <h2 className="text-3xl font-bold">Featured NFT</h2>
+                    <p>Featured gems on home page</p>
+                  </div>
                   <AddFeaturedNftModal />
                 </div>
                 <div className=" mt-5 grid  grid-cols-1 sm:grid-cols-2  xl:grid-cols-3 2xl:grid-cols-4 gap-4 grow  ">
@@ -96,7 +102,10 @@ function Popular() {
             <TabPanel>
               <div>
                 <div className="mt-5 flex  justify-between">
-                  <h2 className="text-3xl font-bold">Trending NFT</h2>
+                  <div>
+                    <h2 className="text-3xl font-bold">Trending NFT</h2>
+                    <p>Trending jewellery on home page</p>
+                  </div>
                   <AddTrendingNftModal />
                 </div>
                 <div className=" mt-5 grid  grid-cols-1 sm:grid-cols-2  xl:grid-cols-3 2xl:grid-cols-4 gap-4 grow  ">

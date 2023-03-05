@@ -22,12 +22,12 @@ function Navbar() {
         <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
           <ul
             className="nav-menu-items"
-            // onClick={showSidebar}
+          // onClick={showSidebar}
           >
             <li className="navbar-toggle">
-              {/* <Link to="#" className="menu-bars">
-                <AiIcons.AiOutlineClose />
-              </Link> */}
+              <Link to="#" className="menu-bars">
+                <img src="http://nfjlabs.io/static/media/logo.ad43e4689783bb8cea3cd82c656fd40b.svg" height={160} width={160} />
+              </Link>
             </li>
             {SidebarData.map((item, index) => {
               return (
