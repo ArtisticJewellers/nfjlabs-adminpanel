@@ -37,6 +37,12 @@ const KycInfo = () => {
     getKycStatus();
   }, []);
 
+  let pdfURL = data.identity;
+  let newPdfURL = pdfURL.replace(
+    "ipfs://",
+    "https://gateway.ipfscdn.io/ipfs/"
+  );
+
   return (
     <div
       style={{
@@ -158,13 +164,8 @@ const KycInfo = () => {
                   />
                 </div>
                 <div style={{ marginTop: "25px" }}>
-                  <a href={data.identity} target="_blank" style={{ cursor: "pointer" }}>
-                    <label
-                      for="name"
-                      style={{ cursor: "pointer" }}
-                    >
-                      Click To View Identity Proof ↪
-                    </label>
+                  <a href={newPdfURL} target="_blank" style={{ cursor: "pointer" }}>
+                    Click To View Identity Proof ↪
                   </a>
                 </div>
               </div>
