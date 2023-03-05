@@ -21,8 +21,8 @@ function App() {
           {/* <Route path="/sign" component={Sign} /> */}
           <Route path="/popular" component={Popular} />
           <Route path="/users" component={Products} />
-          <Route path="/:id" component={KycInfo} />
           <Route path="/settings" component={Settings} />
+          <Route path="/:id" component={KycInfo} />
 
           <Route
             path="/assets/:network/:address/:tokenId"
